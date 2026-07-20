@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>La Casa de Matico</title>
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+
+    <body style="background-color: rgb(231, 217, 217);">
+
+        <nav class="navbar">
+            <input type="checkbox" id="menu-check">
+            <label for="menu-check" class="menu-icon">≡</label>
+            <ul class="menu">
+                <li><a href="conocenos.html">Conócenos</a></li>
+                <li><a href="sucursales.html">Sucursales</a></li>
+            </ul>
+        </nav>
+
+        <div class="header">
+        <h1 style="color:rgb(31, 27, 27); text-align: center;background-color: rgb(204, 91, 189);">La Casa de Matico. De todo para tu hogar</h1>
+        </div>
+
+        <div class="contenido">
+        <p style="font-size: 20px; color: rgb(33, 36, 37); font-weight: bold;">Descubre La Casa de Matico. Artículos para tu hogar</p>
+        </div>
+        <div style="text-align: center;" class="cont-imagen">
+            <img id="visor" src="fachada.jpg" width="750" style="display: block; margin: 10px auto;" class="img-responsive">
+            
+            <button onclick="cambiar('imgplato.jpg')">1</button>
+            <button onclick="cambiar('imgvaca.jpg')">2</button>
+        </div>
+
+        <script>
+            function cambiar(ruta) {
+                document.getElementById('visor').src = ruta;
+            }
+        </script>
+
+            <a href="conocenos.html">
+                <button>Cónocenos</button> 
+            </a>
+        </div>
+        <!--FORMULARIO-->
+        <div class="formulario">
+            <h2>Registro de Usuario</h2>
+            <form id="formulario">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese nombre" required>
+                <label for="email">Email:</label>
+                <input type="email" id="correo" name="correo" placeholder="Ingrese correo" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Ingrese contraseña" required>
+                <button type="submit">Guardar</button>
+                <p id="respuesta"></p>
+            </form>          
+        </div>
+
+        <footer>
+            <p>&copy; 2026 La Casa de Matico Todos los derechos reservados.</p>
+        </footer>
+    <script src="app.js"></script>
+    </body>
+
+</html>
