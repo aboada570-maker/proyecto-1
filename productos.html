@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Productos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <h1>Catálogo de Productos</h1>
+
+    <div class="contenedor-productos">
+
+        <div class="producto">
+
+            <img src="plato.jpg" alt="Plato">
+
+            <h3>Juego de Platos</h3>
+
+            <p>$25.00</p>
+
+            <button onclick="agregarCarrito('Juego de Platos', 25)">
+                Agregar al carrito
+            </button>
+
+        </div>
+
+        <div class="producto">
+
+            <img src="jarron.jpg" alt="Jarrón">
+
+            <h3>Jarrón Decorativo</h3>
+
+            <p>$18.00</p>
+
+            <button onclick="agregarCarrito('Jarrón Decorativo', 18)">
+                Agregar al carrito
+            </button>
+
+        </div>
+
+        <div class="producto">
+
+            <img src="almohada.jpg" alt="Almohada">
+
+            <h3>Almohada</h3>
+
+            <p>$15.00</p>
+
+            <button onclick="agregarCarrito('Almohada', 15)">
+                Agregar al carrito
+            </button>
+
+        </div>
+
+    </div>
+
+    <a href="carrito.html">
+        <button>Ver carrito</button>
+    </a>
+
+    <script src="carrito.js"></script>
+
+</body>
+
+</html>

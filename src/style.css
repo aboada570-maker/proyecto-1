@@ -294,3 +294,141 @@ code {
     border-right-color: var(--border);
   }
 }
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2eeee;
+}
+
+.navbar {
+    background-color: #8e44ad;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.banner {
+    text-align: center;
+    padding: 60px;
+    background: linear-gradient(to right, #cc5bbd, #8e44ad);
+    color: white;
+}
+
+.banner button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.galeria {
+    text-align: center;
+    padding: 30px;
+}
+
+.galeria img {
+    width: 70%;
+    border-radius: 12px;
+}
+
+.categorias {
+    text-align: center;
+    padding: 40px;
+}
+
+.contenedor-categorias {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.categoria {
+    background-color: white;
+    width: 180px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.formulario {
+    width: 400px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.formulario input,
+.formulario button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3ecec;
+    text-align: center;
+}
+
+.contenedor-productos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.producto {
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+button {
+    background-color: #c95cb8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login {
+    width: 350px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
