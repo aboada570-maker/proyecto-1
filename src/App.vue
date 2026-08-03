@@ -1,7 +1,3 @@
 <template>
-  <Inicio />
+  <router-view />
 </template>
-
-<script setup>
-import Inicio from './views/Inicio.vue'
-</script>
