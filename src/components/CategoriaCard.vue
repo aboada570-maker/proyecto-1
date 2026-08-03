@@ -1,14 +1,34 @@
 <template>
 
-<div class="categoria">
+<div class="card categoria">
 
-    <div class="icono">
+<div class="card-body">
 
-        {{ icono }}
+<div class="icono">
 
-    </div>
+{{ icono }}
 
-    <h3>{{ nombre }}</h3>
+</div>
+
+<h4>
+
+{{ nombre }}
+
+</h4>
+
+<p>
+
+{{ descripcion }}
+
+</p>
+
+<button class="btn btn-outline-primary">
+
+Ver más
+
+</button>
+
+</div>
 
 </div>
 
@@ -20,6 +40,8 @@ defineProps({
 
 nombre:String,
 
+descripcion:String,
+
 icono:String
 
 })
@@ -30,23 +52,25 @@ icono:String
 
 .categoria{
 
-    width:180px;
+border:none;
 
-    background:white;
+transition:.3s;
 
-    padding:20px;
+border-radius:15px;
 
-    border-radius:15px;
+}
 
-    text-align:center;
+.categoria:hover{
 
-    box-shadow:0px 5px 10px rgba(0,0,0,.2);
+transform:translateY(-10px);
+
+box-shadow:0 10px 20px rgba(0,0,0,.2);
 
 }
 
 .icono{
 
-    font-size:50px;
+font-size:60px;
 
 }
 

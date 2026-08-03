@@ -1,28 +1,92 @@
 <template>
 
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark fondo">
 
-    <div class="logo">
+<div class="container">
 
-        🏠 La Casa de Matico
+<a class="navbar-brand fw-bold fs-3" href="#">
 
-    </div>
+🏠 La Casa de Matico
 
-    <ul>
+</a>
 
-        <li>Inicio</li>
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
 
-        <li>Productos</li>
+<span class="navbar-toggler-icon"></span>
 
-        <li>Nosotros</li>
+</button>
 
-        <li>Sucursales</li>
+<div
+class="collapse navbar-collapse"
+id="menu">
 
-        <li>Contacto</li>
+<ul class="navbar-nav ms-auto">
 
-        <li>Carrito 🛒</li>
+<li class="nav-item">
+<router-link
+class="nav-link"
+to="/">
+Inicio
+</router-link>
+</li>
 
-    </ul>
+<li class="nav-item">
+<router-link
+class="nav-link"
+to="/catalogo">
+Productos
+</router-link>
+</li>
+
+<li class="nav-item">
+<router-link
+class="nav-link"
+to="/nosotros">
+Nosotros
+</router-link>
+</li>
+
+<li class="nav-item">
+<router-link
+class="nav-link"
+to="/contacto">
+Contacto
+</router-link>
+</li>
+
+<li class="nav-item">
+
+<router-link
+class="nav-link"
+to="/login">
+
+👤
+
+</router-link>
+
+</li>
+
+<li class="nav-item">
+
+<router-link
+class="nav-link"
+to="/carrito">
+
+🛒
+
+</router-link>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
 
 </nav>
 
@@ -30,43 +94,23 @@
 
 <style scoped>
 
-.navbar{
+.fondo{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    background:#8e44ad;
-
-    color:white;
-
-    padding:18px 40px;
+background:#7E57C2;
 
 }
 
-ul{
+.nav-link{
 
-    display:flex;
+font-size:18px;
 
-    list-style:none;
-
-    gap:30px;
+margin-left:15px;
 
 }
 
-li{
+.nav-link:hover{
 
-    cursor:pointer;
-
-}
-
-.logo{
-
-    font-size:24px;
-
-    font-weight:bold;
+color:#FFD54F !important;
 
 }
 

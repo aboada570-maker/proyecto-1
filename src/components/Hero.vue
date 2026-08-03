@@ -1,101 +1,107 @@
 <template>
 
-<section class="hero">
+<div id="bannerPrincipal" class="carousel slide" data-bs-ride="carousel">
 
-    <div class="contenido">
+<div class="carousel-inner">
 
-        <h1>Todo para tu hogar en un solo lugar</h1>
+<div class="carousel-item active">
 
-        <p>
+<img src="/imagenes/bannerhogar.png"
+class="d-block w-100 banner">
 
-            Encuentra artículos de cocina, decoración,
-            organización y mucho más.
+<div class="carousel-caption">
 
-        </p>
+<h1>Todo para tu hogar</h1>
 
-        <div class="botones">
+<p>Calidad, variedad y los mejores precios.</p>
 
-            <button class="principal">
-                Ver Catálogo
-            </button>
+<router-link
+to="/catalogo"
+class="btn btn-warning">
 
-            <button class="secundario">
-                Promociones
-            </button>
+Ver Catálogo
 
-        </div>
+</router-link>
 
-    </div>
+</div>
 
-</section>
+</div>
+
+<div class="carousel-item">
+
+<img src="/imagenes/imgvaca.jpg"
+class="d-block w-100 banner">
+
+<div class="carousel-caption">
+
+<h1>Decoración para cada espacio</h1>
+
+</div>
+
+</div>
+
+<div class="carousel-item">
+
+<img src="/imagenes/imgtazav.jpg"
+class="d-block w-100 banner">
+
+<div class="carousel-caption">
+
+<h1>Los mejores productos para tu hogar</h1>
+
+</div>
+
+</div>
+
+</div>
+
+    <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#bannerPrincipal"
+    data-bs-slide="prev">
+
+    <span class="carousel-control-prev-icon"></span>
+
+    </button>
+
+    <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#bannerPrincipal"
+    data-bs-slide="next">
+
+    <span class="carousel-control-next-icon"></span>
+
+    </button>
+
+</div>
 
 </template>
 
 <style scoped>
 
-.hero{
+.banner{
 
-height:500px;
+height:550px;
 
-display:flex;
+object-fit:cover;
 
-justify-content:center;
+filter:brightness(.6);
 
-align-items:center;
+}
 
-text-align:center;
+.carousel-caption{
 
-background:linear-gradient(135deg,#8e44ad,#d88be8);
-
-color:white;
+bottom:30%;
 
 }
 
 h1{
 
-font-size:50px;
+font-size:60px;
 
-margin-bottom:20px;
-
-}
-
-p{
-
-font-size:22px;
-
-}
-
-button{
-
-margin:15px;
-
-padding:15px 35px;
-
-border:none;
-
-border-radius:10px;
-
-font-size:18px;
-
-cursor:pointer;
-
-}
-
-.principal{
-
-background:white;
-
-color:#8e44ad;
-
-}
-
-.secundario{
-
-background:transparent;
-
-border:2px solid white;
-
-color:white;
+font-weight:bold;
 
 }
 
