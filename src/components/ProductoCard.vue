@@ -1,81 +1,264 @@
 <template>
 
-<div class="producto">
+  <div class="card producto h-100">
 
-<img :src="imagen">
+    <div class="imagen-container">
 
-<h3>{{ nombre }}</h3>
+      <img
+        :src="producto.imagen"
+        :alt="producto.nombre"
+        class="card-img-top"
+      >
 
-<p>${{ precio }}</p>
+      <span
+        v-if="producto.destacado"
+        class="badge destacado"
+      >
 
-<button>
+        ⭐ Destacado
 
-Agregar al carrito
+      </span>
 
-</button>
+    </div>
 
+    <div class="card-body d-flex flex-column">
+
+      <small class="categoria">
+
+        {{ producto.categoria }}
+
+      </small>
+
+      <h5 class="card-title">
+
+        {{ producto.nombre }}
+
+      </h5>
+
+
+      <div class="precio">
+
+        ${{ producto.precio.toFixed(2) }}
+
+      </div>
+
+
+      <p class="stock">
+
+        <i class="bi bi-box-seam"></i>
+
+        {{ producto.stock }} disponibles
+
+      </p>
+
+
+      <button
+        class="btn btn-carrito mt-auto"
+        @click="agregarAlCarrito"
+      >
+
+        <i class="bi bi-cart-plus"></i>
+
+        Agregar al carrito
+
+      </button>
+
+      <div class="botones">
+
+        <router-link
+            :to="`/producto/${producto.id}`"
+            class="btn btn-detalle"
+        >
+
+            <i class="bi bi-eye"></i>
+
+            Ver producto
+
+        </router-link>
+
+        <button
+            class="btn btn-carrito"
+            @click="agregarAlCarrito"
+        >
+
+            <i class="bi bi-cart-plus"></i>
+
+            Agregar
+
+        </button>
+
+        </div>
+    </div>
 </div>
-
 </template>
+
 
 <script setup>
 
-defineProps({
+const props = defineProps({
 
-imagen:String,
+  producto: {
 
-nombre:String,
+    type: Object,
 
-precio:Number
+    required: true
+
+  }
 
 })
 
+
+function agregarAlCarrito() {
+
+  alert(
+    `${props.producto.nombre} fue agregado al carrito 🛒`
+  )
+
+}
+
 </script>
+
 
 <style scoped>
 
-.producto{
+.producto {
 
-width:250px;
+  border: none;
 
-background:white;
+  border-radius: 15px;
 
-border-radius:15px;
+  overflow: hidden;
 
-padding:20px;
+  transition: all .3s ease;
 
-text-align:center;
-
-box-shadow:0px 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
 
 }
 
-img{
 
-width:100%;
+.producto:hover {
 
-height:220px;
+  transform: translateY(-8px);
 
-object-fit:cover;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+
+}
+
+
+.imagen-container {
+
+  height: 230px;
+
+  position: relative;
+
+  overflow: hidden;
 
 }
 
-button{
 
-margin-top:15px;
+.card-img-top {
 
-background:#8e44ad;
+  width: 100%;
 
-color:white;
+  height: 100%;
 
-padding:10px 20px;
+  object-fit: cover;
 
-border:none;
-
-border-radius:8px;
-
-cursor:pointer;
+  transition: transform .4s ease;
 
 }
+
+
+.producto:hover .card-img-top {
+
+  transform: scale(1.08);
+
+}
+
+
+.destacado {
+
+  position: absolute;
+
+  top: 12px;
+
+  left: 12px;
+
+  background: #ffc107;
+
+  color: #333;
+
+}
+
+.categoria {
+
+  color: #7E57C2;
+
+  font-weight: bold;
+
+}
+
+
+.precio {
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  color: #5E35B1;
+
+  margin: 10px 0;
+
+}
+
+
+.stock {
+
+  color: #6c757d;
+
+  font-size: 14px;
+
+}
+
+
+.btn-carrito {
+
+  background: #7E57C2;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+}
+
+.btn-carrito:hover {
+
+  background: #5E35B1;
+
+  color: white;
+
+}
+
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-detalle {
+  border: 1px solid #7E57C2;
+  color: #7E57C2;
+}
+
+.btn-detalle:hover {
+  background: #7E57C2;
+  color: white;
+}
+
 
 </style>
