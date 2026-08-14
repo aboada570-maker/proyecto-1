@@ -119,6 +119,7 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 import Navbar from '../components/Navbar.vue'
 
@@ -126,9 +127,12 @@ import Footer from '../components/Footer.vue'
 
 import ProductoCard from '../components/ProductoCard.vue'
 
+import { productos } from '../data/productos'
 
 
-const busqueda = ref('')
+const route = useRoute()
+
+const busqueda = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
 
 const categoriaSeleccionada = ref('Todas')
@@ -149,94 +153,9 @@ const categorias = [
 ]
 
 
-const productos = ref([
-
-  {
-    id: 1,
-    nombre: 'Juego de Platos',
-    categoria: 'Cocina',
-    precio: 25.00,
-    stock: 15,
-    imagen: '/imagenes/platos.jpg',
-    destacado: true
-  },
-
-  {
-    id: 2,
-    nombre: 'Bandeja Decorativa',
-    categoria: 'Decoración',
-    precio: 18.00,
-    stock: 8,
-    imagen: '/imagenes/bandeja.jpg',
-    destacado: true
-  },
-
-  {
-    id: 3,
-    nombre: 'Organizador Multiuso',
-    categoria: 'Organización',
-    precio: 12.50,
-    stock: 20,
-    imagen: '/imagenes/organizador.jpg',
-    destacado: false
-  },
-
-  {
-    id: 4,
-    nombre: 'Vajilla',
-    categoria: 'Cocina',
-    precio: 15.00,
-    stock: 10,
-    imagen: '/imagenes/vajilla.jpg',
-    destacado: false
-  },
-
-  {
-    id: 5,
-    nombre: 'Canasta Decorativa',
-    categoria: 'Decoración',
-    precio: 22.00,
-    stock: 7,
-    imagen: '/imagenes/canasta.jpg',
-    destacado: true
-  },
-
-  {
-    id: 6,
-    nombre: 'Taza de Cerámica',
-    categoria: 'Cocina',
-    precio: 16.00,
-    stock: 25,
-    imagen: '/imagenes/taza.jpg',
-    destacado: false
-  },
-
-  {
-    id: 7,
-    nombre: 'Cuenco Multiusos',
-    categoria: 'Organización',
-    precio: 14.00,
-    stock: 12,
-    imagen: '/imagenes/cuenco.jpg',
-    destacado: false
-  },
-
-  {
-    id: 8,
-    nombre: 'Set de Saleros',
-    categoria: 'Regalos',
-    precio: 30.00,
-    stock: 5,
-    imagen: '/imagenes/saleros.jpg',
-    destacado: true
-  }
-
-])
-
-
 const productosFiltrados = computed(() => {
 
-  return productos.value.filter(producto => {
+  return productos.filter(producto => {
 
     const coincideBusqueda =
       producto.nombre

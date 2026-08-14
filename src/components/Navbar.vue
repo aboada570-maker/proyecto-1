@@ -4,7 +4,7 @@
   <div class="container d-flex justify-content-between align-items-center">
     <span><i class="bi bi-truck"></i> Envío gratis en compras mayores a $50</span>
     <span class="topbar-links">
-      <a href="tel:+50212345678"><i class="bi bi-telephone"></i> +502 1234-5678</a>
+      <a href="tel:+593995244740"><i class="bi bi-telephone"></i> +593 995244740</a>
       <a href="mailto:contacto@lacasadematico.com"><i class="bi bi-envelope"></i> contacto@lacasadematico.com</a>
     </span>
   </div>

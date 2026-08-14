@@ -39,8 +39,8 @@
       <div class="col-6 col-lg-3">
         <h6>Contacto</h6>
         <ul>
-          <li><i class="bi bi-geo-alt"></i> Ciudad de Guatemala</li>
-          <li><i class="bi bi-telephone"></i> +502 1234-5678</li>
+          <li><i class="bi bi-geo-alt"></i> Quito</li>
+          <li><i class="bi bi-telephone"></i> +593 995244740</li>
           <li><i class="bi bi-envelope"></i> contacto@lacasadematico.com</li>
         </ul>
       </div>

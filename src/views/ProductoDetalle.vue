@@ -20,7 +20,14 @@
       </div>
 
 
-      <div class="row g-5">
+      <div v-if="!producto" class="no-encontrado">
+        <i class="bi bi-search"></i>
+        <h3>Producto no encontrado</h3>
+        <p>El producto que buscas no existe o ya no está disponible.</p>
+        <router-link to="/catalogo" class="btn btn-primary">Volver al catálogo</router-link>
+      </div>
+
+      <div v-else class="row g-5">
 
 
         <div class="col-md-6">
@@ -170,72 +177,23 @@ import { ref } from 'vue'
 
 import { useRoute } from 'vue-router'
 
+import Swal from 'sweetalert2'
+
 import Navbar from '../components/Navbar.vue'
 
 import Footer from '../components/Footer.vue'
 
+import { obtenerProductoPorId } from '../data/productos'
+
+import { useCarrito } from '../store/carrito'
+
 
 const route = useRoute()
 
-
-const productos = [
-
-  {
-    id: 1,
-    nombre: 'Juego de Platos',
-    categoria: 'Cocina',
-    precio: 25.00,
-    stock: 15,
-    imagen: '/imagenes/platos.jpg',
-    opiniones: 12,
-    descripcion:
-      'Hermoso juego de platos ideal para complementar tu mesa y disfrutar momentos especiales en familia.'
-  },
-
-  {
-    id: 2,
-    nombre: 'Bandeja Decorativa',
-    categoria: 'Decoración',
-    precio: 18.00,
-    stock: 8,
-    imagen: '/imagenes/bandeja.jpg',
-    opiniones: 8,
-    descripcion:
-      'Bandeja decorativa ideal para darle un toque elegante y especial a cualquier espacio de tu hogar.'
-  },
-
-  {
-    id: 3,
-    nombre: 'Organizador Multiuso',
-    categoria: 'Organización',
-    precio: 12.50,
-    stock: 20,
-    imagen: '/imagenes/organizador.jpg',
-    opiniones: 15,
-    descripcion:
-      'Práctico organizador para mantener tus espacios ordenados y aprovechar mejor cada lugar.'
-  },
-
-  {
-    id: 4,
-    nombre: 'Vajilla',
-    categoria: 'Cocina',
-    precio: 15.00,
-    stock: 10,
-    imagen: '/imagenes/vajilla.jpg',
-    opiniones: 6,
-    descripcion:
-      'Set de vajilla elegante y funcional, perfecto para tus comidas diarias o para ocasiones especiales.'
-  }
-
-]
+const { agregarItem } = useCarrito()
 
 
-const producto = productos.find(
-
-  p => p.id === Number(route.params.id)
-
-)
+const producto = obtenerProductoPorId(route.params.id)
 
 
 const cantidad = ref(1)
@@ -265,9 +223,17 @@ function disminuir() {
 
 function agregarAlCarrito() {
 
-  alert(
-    `${cantidad.value} unidad(es) de ${producto.nombre} agregada(s) al carrito 🛒`
-  )
+  agregarItem(producto, cantidad.value)
+
+  Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'success',
+    title: `${cantidad.value} unidad(es) de ${producto.nombre} agregadas al carrito`,
+    showConfirmButton: false,
+    timer: 1800,
+    timerProgressBar: true
+  })
 
 }
 
@@ -301,6 +267,33 @@ function agregarAlCarrito() {
   text-decoration: none;
 
   font-weight: bold;
+
+}
+
+
+.no-encontrado {
+
+  text-align: center;
+
+  padding: 80px 20px;
+
+  color: #777;
+
+}
+
+
+.no-encontrado i {
+
+  font-size: 60px;
+
+  color: #c7bce6;
+
+}
+
+
+.no-encontrado .btn {
+
+  margin-top: 15px;
 
 }
 
