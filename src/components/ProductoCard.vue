@@ -19,6 +19,15 @@
 
       </span>
 
+      <span
+        v-if="producto.precioAnterior"
+        class="badge descuento"
+      >
+
+        -{{ porcentajeDescuento }}%
+
+      </span>
+
     </div>
 
     <div class="card-body d-flex flex-column">
@@ -35,10 +44,22 @@
 
       </h5>
 
+      <div class="estrellas" v-if="producto.rating">
+        <i
+          v-for="n in 5"
+          :key="n"
+          class="bi"
+          :class="n <= producto.rating ? 'bi-star-fill' : 'bi-star'"
+        ></i>
+        <span v-if="producto.opiniones">({{ producto.opiniones }})</span>
+      </div>
 
       <div class="precio">
 
         ${{ producto.precio.toFixed(2) }}
+        <span v-if="producto.precioAnterior" class="precio-anterior">
+          ${{ producto.precioAnterior.toFixed(2) }}
+        </span>
 
       </div>
 
@@ -95,6 +116,10 @@
 
 <script setup>
 
+import { computed } from 'vue'
+import Swal from 'sweetalert2'
+import { useCarrito } from '../store/carrito'
+
 const props = defineProps({
 
   producto: {
@@ -107,12 +132,28 @@ const props = defineProps({
 
 })
 
+const { agregarItem } = useCarrito()
+
+const porcentajeDescuento = computed(() => {
+  if (!props.producto.precioAnterior) return 0
+  return Math.round(
+    ((props.producto.precioAnterior - props.producto.precio) / props.producto.precioAnterior) * 100
+  )
+})
 
 function agregarAlCarrito() {
 
-  alert(
-    `${props.producto.nombre} fue agregado al carrito 🛒`
-  )
+  agregarItem(props.producto)
+
+  Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'success',
+    title: `${props.producto.nombre} agregado al carrito`,
+    showConfirmButton: false,
+    timer: 1800,
+    timerProgressBar: true
+  })
 
 }
 
@@ -187,6 +228,52 @@ function agregarAlCarrito() {
   background: #ffc107;
 
   color: #333;
+
+}
+
+.descuento {
+
+  position: absolute;
+
+  top: 12px;
+
+  right: 12px;
+
+  background: #dc3545;
+
+  color: white;
+
+}
+
+.estrellas {
+
+  color: #ffc107;
+
+  font-size: 13px;
+
+  margin: 4px 0;
+
+}
+
+.estrellas span {
+
+  color: #6c757d;
+
+  margin-left: 4px;
+
+}
+
+.precio-anterior {
+
+  font-size: 15px;
+
+  font-weight: normal;
+
+  color: #999;
+
+  text-decoration: line-through;
+
+  margin-left: 6px;
 
 }
 
