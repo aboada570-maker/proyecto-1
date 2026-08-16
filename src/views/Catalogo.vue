@@ -151,7 +151,11 @@ const route = useRoute()
 const busqueda = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
 
-const categoriaSeleccionada = ref('Todas')
+const categoriaSeleccionada = ref(
+  typeof route.query.categoria === 'string' && categorias.includes(route.query.categoria)
+    ? route.query.categoria
+    : 'Todas'
+)
 
 const productos = ref([])
 const cargando = ref(true)

@@ -22,11 +22,13 @@
 
 </p>
 
-<button class="btn btn-outline-primary">
+<router-link
+:to="{ path: '/catalogo', query: { categoria: nombre } }"
+class="btn btn-outline-primary">
 
 Ver más
 
-</button>
+</router-link>
 
 </div>
 
@@ -36,7 +38,7 @@ Ver más
 
 <script setup>
 
-defineProps({
+const { nombre } = defineProps({
 
 nombre:String,
 
