@@ -5,13 +5,13 @@ const estado = reactive({
 })
 
 function agregarItem(producto, cantidad = 1) {
-  const existente = estado.items.find(item => item.id === producto.id)
+  const existente = estado.items.find(item => item.id === producto._id)
 
   if (existente) {
     existente.cantidad += cantidad
   } else {
     estado.items.push({
-      id: producto.id,
+      id: producto._id,
       nombre: producto.nombre,
       precio: producto.precio,
       imagen: producto.imagen,

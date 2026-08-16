@@ -82,12 +82,42 @@ Contacto
 
 <ul class="navbar-nav acciones align-items-lg-center">
 
-<li class="nav-item">
+<li class="nav-item dropdown" v-if="estaAutenticado">
+
+<a
+class="nav-link icono-accion dropdown-toggle"
+href="#"
+role="button"
+data-bs-toggle="dropdown"
+title="Mi cuenta">
+
+<i class="bi bi-person-check"></i>
+
+</a>
+
+<ul class="dropdown-menu dropdown-menu-end">
+  <li><span class="dropdown-item-text">Hola, {{ usuario?.nombre }}</span></li>
+  <li v-if="esAdmin">
+    <router-link class="dropdown-item" to="/admin/productos">
+      <i class="bi bi-speedometer2"></i> Panel admin
+    </router-link>
+  </li>
+  <li><hr class="dropdown-divider"></li>
+  <li>
+    <button class="dropdown-item" @click="salir">
+      <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+    </button>
+  </li>
+</ul>
+
+</li>
+
+<li class="nav-item" v-else>
 
 <router-link
 class="nav-link icono-accion"
 to="/login"
-title="Mi cuenta">
+title="Iniciar sesión">
 
 <i class="bi bi-person"></i>
 
@@ -123,14 +153,21 @@ title="Carrito">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCarrito } from '../store/carrito'
+import { useAuth } from '../store/auth'
 
 const { totalUnidades } = useCarrito()
+const { usuario, estaAutenticado, esAdmin, cerrarSesion } = useAuth()
 
 const terminoBusqueda = ref('')
 const router = useRouter()
 
 function buscar() {
   router.push({ path: '/catalogo', query: terminoBusqueda.value ? { q: terminoBusqueda.value } : {} })
+}
+
+function salir() {
+  cerrarSesion()
+  router.push('/')
 }
 </script>
 

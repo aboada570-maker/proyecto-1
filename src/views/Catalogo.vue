@@ -75,37 +75,52 @@
 
     <section class="container productos">
 
-      <div class="row g-4">
+      <div v-if="cargando" class="cargando">
+        <div class="spinner-border text-primary"></div>
+        <p class="mt-3">Cargando productos...</p>
+      </div>
 
-        <div
-          v-for="producto in productosFiltrados"
-          :key="producto.id"
-          class="col-12 col-sm-6 col-lg-3"
-        >
+      <div v-else-if="error" class="sin-resultados">
+        <i class="bi bi-wifi-off"></i>
+        <h3>No se pudo cargar el catálogo</h3>
+        <p>{{ error }}</p>
+      </div>
 
-          <ProductoCard
-            :producto="producto"
-          />
+      <template v-else>
+
+        <div class="row g-4">
+
+          <div
+            v-for="producto in productosFiltrados"
+            :key="producto._id"
+            class="col-12 col-sm-6 col-lg-3"
+          >
+
+            <ProductoCard
+              :producto="producto"
+            />
+
+          </div>
 
         </div>
 
-      </div>
 
+        <div
+          v-if="productosFiltrados.length === 0"
+          class="sin-resultados"
+        >
 
-      <div
-        v-if="productosFiltrados.length === 0"
-        class="sin-resultados"
-      >
+          <i class="bi bi-search"></i>
 
-        <i class="bi bi-search"></i>
+          <h3>No encontramos productos</h3>
 
-        <h3>No encontramos productos</h3>
+          <p>
+            Intenta buscar otro producto o categoría.
+          </p>
 
-        <p>
-          Intenta buscar otro producto o categoría.
-        </p>
+        </div>
 
-      </div>
+      </template>
 
     </section>
 
@@ -118,7 +133,7 @@
 
 <script setup>
 
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 import Navbar from '../components/Navbar.vue'
@@ -127,7 +142,8 @@ import Footer from '../components/Footer.vue'
 
 import ProductoCard from '../components/ProductoCard.vue'
 
-import { productos } from '../data/productos'
+import productosServicios from '../services/productosServicios'
+import { categorias } from '../data/categorias'
 
 
 const route = useRoute()
@@ -137,25 +153,24 @@ const busqueda = ref(typeof route.query.q === 'string' ? route.query.q : '')
 
 const categoriaSeleccionada = ref('Todas')
 
+const productos = ref([])
+const cargando = ref(true)
+const error = ref(null)
 
-const categorias = [
-
-  'Cocina',
-
-  'Decoración',
-
-  'Organización',
-
-  'Limpieza',
-
-  'Regalos'
-
-]
+onMounted(async () => {
+  try {
+    productos.value = await productosServicios.obtenerProductos()
+  } catch {
+    error.value = 'Revisa tu conexión o intenta de nuevo más tarde.'
+  } finally {
+    cargando.value = false
+  }
+})
 
 
 const productosFiltrados = computed(() => {
 
-  return productos.filter(producto => {
+  return productos.value.filter(producto => {
 
     const coincideBusqueda =
       producto.nombre
@@ -240,6 +255,16 @@ const productosFiltrados = computed(() => {
 .sin-resultados i {
 
   font-size: 60px;
+
+}
+
+.cargando {
+
+  text-align: center;
+
+  padding: 80px 20px;
+
+  color: #777;
 
 }
 

@@ -20,7 +20,11 @@
       </div>
 
 
-      <div v-if="!producto" class="no-encontrado">
+      <div v-if="cargando" class="cargando">
+        <div class="spinner-border text-primary"></div>
+      </div>
+
+      <div v-else-if="!producto" class="no-encontrado">
         <i class="bi bi-search"></i>
         <h3>Producto no encontrado</h3>
         <p>El producto que buscas no existe o ya no está disponible.</p>
@@ -173,7 +177,7 @@
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import { useRoute } from 'vue-router'
 
@@ -183,7 +187,7 @@ import Navbar from '../components/Navbar.vue'
 
 import Footer from '../components/Footer.vue'
 
-import { obtenerProductoPorId } from '../data/productos'
+import productosServicios from '../services/productosServicios'
 
 import { useCarrito } from '../store/carrito'
 
@@ -193,7 +197,18 @@ const route = useRoute()
 const { agregarItem } = useCarrito()
 
 
-const producto = obtenerProductoPorId(route.params.id)
+const producto = ref(null)
+const cargando = ref(true)
+
+onMounted(async () => {
+  try {
+    producto.value = await productosServicios.obtenerProducto(route.params.id)
+  } catch {
+    producto.value = null
+  } finally {
+    cargando.value = false
+  }
+})
 
 
 const cantidad = ref(1)
@@ -201,7 +216,7 @@ const cantidad = ref(1)
 
 function aumentar() {
 
-  if (cantidad.value < producto.stock) {
+  if (cantidad.value < producto.value.stock) {
 
     cantidad.value++
 
@@ -223,13 +238,13 @@ function disminuir() {
 
 function agregarAlCarrito() {
 
-  agregarItem(producto, cantidad.value)
+  agregarItem(producto.value, cantidad.value)
 
   Swal.fire({
     toast: true,
     position: 'top-end',
     icon: 'success',
-    title: `${cantidad.value} unidad(es) de ${producto.nombre} agregadas al carrito`,
+    title: `${cantidad.value} unidad(es) de ${producto.value.nombre} agregadas al carrito`,
     showConfirmButton: false,
     timer: 1800,
     timerProgressBar: true

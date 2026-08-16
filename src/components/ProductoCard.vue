@@ -87,7 +87,7 @@
       <div class="botones">
 
         <router-link
-            :to="`/producto/${producto.id}`"
+            :to="`/producto/${producto._id}`"
             class="btn btn-detalle"
         >
 
